@@ -1,5 +1,6 @@
 # main.py
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 import logging
 from controller import run_experiment
@@ -7,8 +8,11 @@ from controller import run_experiment
 # Configura o log para vermos o que está a acontecer no terminal
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
-# Carrega as variáveis do ficheiro .env (onde deve estar a OPENROUTER_API_KEY)
-load_dotenv()
+# Carrega as variáveis do ficheiro .env ao lado deste script
+load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
+
+if not os.environ.get("OPENROUTER_API_KEY"):
+    raise ValueError("OPENROUTER_API_KEY não foi carregada da .env.")
 
 # ==========================================
 # CONFIGURAÇÕES DA RODADA DO EXPERIMENTO
@@ -16,24 +20,32 @@ load_dotenv()
 
 # 1. Caminhos dos Ficheiros
 # Substitua pelos caminhos reais no seu computador
-QUESTIONS_CSV = "./dados/Banco de perguntas OFICIAL (1).xlsx - Banco de Perguntas (Mapa).csv"
-DATA_CSV = "./dados/Banco de perguntas OFICIAL (1).xlsx - Dados (Mapa).csv"
-IMAGE_PATH = "./dados/mapa_brasil_renda.png" # Você precisa ter a imagem PNG do gráfico/mapa
+QUESTIONS_CSV = "./dados/perguntas_scatter.csv"
+DATA_CSV = "./dados/TABELA.csv"
+IMAGE_PATH = "./dados/scatterplot.jpeg"
 OUTPUT_CSV = "./resultados_experimento_mapa.csv"
 
 # 2. Definições do Lote
-IS_PILOT = True # Mude para False quando quiser rodar as 40 perguntas
+DEBUG = True # Quando True, roda só as 5 primeiras perguntas e imprime o payload completo no terminal
 
 # Quais modelos testar? (Nomes oficiais do OpenRouter)
 MODELS_TO_TEST = [
-    "anthropic/claude-3.5-sonnet",
-    "google/gemini-1.5-pro",
-    "openai/gpt-4o"
+    # ==========================================
+    # 1. Modelos Rápidos (Foco em Agilidade / Custo-Benefício)
+    # ==========================================
+    "google/gemini-3.5-flash",      # Google Rápido
+    "openai/gpt-4o-mini",           # OpenAI Rápido
+    "anthropic/claude-3.5-haiku",   # Anthropic Rápido
+    
+    # ==========================================
+    # 2. Modelos de Maior Pensamento (Foco em Raciocínio Profundo / Pro)
+    # ==========================================
+    "google/gemini-3.1-pro-preview", # Google Pro (Preview)
+    "openai/gpt-4o",                 # OpenAI Pro (Omni)
+    "anthropic/claude-3.5-sonnet"    # Anthropic Pro (Sonnet)
 ]
-
-# Quais condições? 'M' (Mapa), 'T' (Tabela), 'MT' (Mapa + Tabela)
-# Se fosse o scatterplot, usaria 'G', 'T', 'GT'
-CONDITIONS_TO_TEST = ['M', 'T', 'MT'] 
+# Quais condições? 'T' (Tabela), 'G' (Imagem), 'GT' (Tabela + Imagem)
+CONDITIONS_TO_TEST = ['T', 'GT', 'G'] 
 
 if __name__ == "__main__":
     logging.info("A iniciar o pipeline de Chart QA...")
@@ -46,5 +58,5 @@ if __name__ == "__main__":
         output_csv_path=OUTPUT_CSV,
         models_to_test=MODELS_TO_TEST,
         conditions_to_test=CONDITIONS_TO_TEST,
-        is_pilot=IS_PILOT
+        debug=DEBUG
     )

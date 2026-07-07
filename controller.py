@@ -10,12 +10,12 @@ logger = logging.getLogger(__name__)
 
 def run_experiment(
     questions_csv_path: str,
-    data_csv_path: str,
+    data_csv_path: str | None,
     image_path: str,
     output_csv_path: str,
     models_to_test: list,
     conditions_to_test: list,
-    is_pilot: bool = False
+    debug: bool = False
 ):
     """
     Função principal que orquestra o experimento de Chart QA.
@@ -23,7 +23,7 @@ def run_experiment(
     # 1. Carrega os dados (Banco de Perguntas e Dados do IBGE)
     logger.info("A carregar os dados...")
     df_perguntas, df_dados = load_experiment_data(questions_csv_path, data_csv_path)
-    
+
     # Prepara a tabela como string CSV pura (conforme conversamos)
     tabela_texto = df_dados.to_csv(index=False)
     
@@ -37,9 +37,9 @@ def run_experiment(
     # 3. Descobre o que já foi processado para retomar de onde parou
     processed_set = get_processed_combinations(output_csv_path)
     
-    # Limita a 5 perguntas se for a rodada piloto
-    if is_pilot:
-        logger.info("MODO PILOTO ATIVADO: Testando apenas as primeiras 5 perguntas.")
+    # Limita a 5 perguntas no modo debug
+    if debug:
+        logger.info("MODO DEBUG ATIVADO: Testando apenas as 5 primeiras perguntas.")
         df_perguntas = df_perguntas.head(5)
 
     # Verifica se a chave da API existe antes de começar
@@ -56,7 +56,7 @@ def run_experiment(
             logger.info(f"  -> Condição: {condicao}")
             
             for index, row in df_perguntas.iterrows():
-                id_pergunta = str(row.get('ID')) # Ajuste se a sua coluna se chamar de forma diferente
+                id_pergunta = str(row.get('ID'))
                 pergunta = str(row.get('Pergunta'))
                 
                 # Previne execução duplicada
@@ -80,6 +80,23 @@ def run_experiment(
 
                 # Chama a API (já blindada com retries no model.py)
                 resposta_crua = llm.talk_to_model(messages=payload)
+                if debug:
+                    print()
+                    print(f"=== DEBUG | modelo={model_id} | condicao={condicao} | id={id_pergunta} ===")
+                    for message in payload:
+                        role = message.get("role", "")
+                        content = message.get("content")
+                        print(f"[{role}]")
+                        if isinstance(content, list):
+                            for item in content:
+                                item_type = item.get("type")
+                                if item_type == "text":
+                                    print(item.get("text", ""))
+                                elif item_type == "image_url":
+                                    print("[image_url: data:image/png;base64,<omitted>]")
+                        else:
+                            print(content)
+                    print(f"Resposta: {resposta_crua}")
                 
                 # Monta o registo para salvar no CSV de saída
                 result_dict = {

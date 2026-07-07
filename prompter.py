@@ -15,12 +15,12 @@ class Prompter:
         """
         base = "Você receberá {contexto} e uma pergunta sobre os dados. Responda de forma objetiva. Se a resposta for numérica, forneça apenas o valor. Se for um estado, forneça apenas o nome."
         
-        if condicao in ['G', 'M']:
-            contexto = "um gráfico/mapa"
+        if condicao == 'G':
+            contexto = "um gráfico de dispersão"
         elif condicao == 'T':
             contexto = "uma tabela de dados"
-        else: # 'GT' ou 'MT'
-            contexto = "um gráfico/mapa e uma tabela de dados"
+        else:
+            contexto = "um gráfico de dispersão e uma tabela de dados"
             
         return base.format(contexto=contexto)
 
@@ -39,19 +39,19 @@ class Prompter:
         user_content = []
         
         # Injeta a tabela se a condição exigir
-        if condicao in ['T', 'GT', 'MT']:
+        if condicao in ['T', 'GT']:
             if not tabela_texto:
                 raise ValueError(f"Condição '{condicao}' exige 'tabela_texto'.")
             texto_tabela = f"Aqui estão os dados:\n\n{tabela_texto}\n\nPergunta: {pergunta}"
             user_content.append({"type": "text", "text": texto_tabela})
         
         # Injeta a imagem se a condição exigir
-        if condicao in ['G', 'M', 'GT', 'MT']:
+        if condicao in ['G', 'GT']:
             if not base64_image:
                 raise ValueError(f"Condição '{condicao}' exige 'base64_image'.")
             
-            # Se for só gráfico, a pergunta precisa entrar aqui
-            if condicao in ['G', 'M']:
+            # Se for só imagem, a pergunta precisa entrar aqui
+            if condicao == 'G':
                 user_content.append({"type": "text", "text": f"Pergunta: {pergunta}"})
                 
             user_content.append({

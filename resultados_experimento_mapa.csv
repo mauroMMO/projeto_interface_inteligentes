@@ -1,0 +1,61 @@
+﻿Modelo,Condicao,ID_Pergunta,Quadrante,Categoria_Analitica,Resposta_Crua,Gabarito,Tipo_Resposta,Erro_API
+google/gemini-3.5-flash,T,FE5,C+NV,Find Extremum,"2,982,818",2.982.818 (Distrito Federal).,TBD,NAO
+google/gemini-3.5-flash,T,RV4,C+NV,Retrieve Value,11,"11,0 anos (São Paulo).",TBD,NAO
+google/gemini-3.5-flash,T,CDF1,C+NV,Compute Derived + Filter,"Para calcular a renda média dos estados da região Nordeste, somamos as rendas médias de cada um dos 9 estados dessa região e dividimos por 9:
+
+* Maranhão: 1.079
+* Piauí: 1.351
+* Ceará: 1.202
+* Rio Grande do Norte: 1.552
+* Paraíba: 1.377
+* Pernambuco: 1.407
+* Alagoas: 1.318
+* Sergipe: 1.426
+* Bahia: 1.329
+
+Soma = 12.041
+Média = 12.041 / 9 ≈ 1.337,89
+
+1.337,89","≈ R$1.337,9.",TBD,NAO
+google/gemini-3.5-flash,T,CDF2,C+NV,Compute Derived + Filter,11,10 estados.,TBD,NAO
+google/gemini-3.5-flash,T,CDF3,C+NV,Compute Derived + Filter,10.43,"≈ 10,43 anos.",TBD,NAO
+google/gemini-3.5-flash,GT,FE5,C+NV,Find Extremum,"2,982,818",2.982.818 (Distrito Federal).,TBD,NAO
+google/gemini-3.5-flash,GT,RV4,C+NV,Retrieve Value,11,"11,0 anos (São Paulo).",TBD,NAO
+google/gemini-3.5-flash,GT,CDF1,C+NV,Compute Derived + Filter,"1.338,11","≈ R$1.337,9.",TBD,NAO
+google/gemini-3.5-flash,GT,CDF2,C+NV,Compute Derived + Filter,11,10 estados.,TBD,NAO
+google/gemini-3.5-flash,GT,CDF3,C+NV,Compute Derived + Filter,"10,43","≈ 10,43 anos.",TBD,NAO
+google/gemini-3.5-flash,G,FE5,C+NV,Find Extremum,3 mi,2.982.818 (Distrito Federal).,TBD,NAO
+google/gemini-3.5-flash,G,RV4,C+NV,Retrieve Value,"11,0","11,0 anos (São Paulo).",TBD,NAO
+google/gemini-3.5-flash,G,CDF1,C+NV,Compute Derived + Filter,"Para calcular a renda média dos estados da região Nordeste (representados pelos pontos verdes), identificamos os valores aproximados de renda média mensal domiciliar per capita (eixo X) de cada um dos 9 estados:
+
+* **MA** (Maranhão): R$ 1.080
+* **CE** (Ceará): R$ 1.200
+* **BA** (Bahia): R$ 1.330
+* **AL** (Alagoas): R$ 1.320
+* **PI** (Piauí): R$ 1.350
+* **PB** (Paraíba): R$ 1.380
+* **PE** (Pernambuco): R$ 1.410
+* **SE** (Sergipe): R$ 1.430
+* **RN** (Rio Grande do Norte): R$ 1.550
+
+**Soma:** 1.080 + 1.200 + 1.330 + 1.320 + 1.350 + 1.380 + 1.410 + 1.430 + 1.550 = 12.050  
+**Média (Soma / 9):** ~R$ 1.339
+
+A renda média dos estados da região Nordeste é de aproximadamente **R$ 1.340**.","≈ R$1.337,9.",TBD,NAO
+google/gemini-3.5-flash,G,CDF2,C+NV,Compute Derived + Filter,11,10 estados.,TBD,NAO
+google/gemini-3.5-flash,G,CDF3,C+NV,Compute Derived + Filter,"10,43","≈ 10,43 anos.",TBD,NAO
+openai/gpt-4o-mini,T,FE5,C+NV,Find Extremum,"45,973,194",2.982.818 (Distrito Federal).,TBD,NAO
+openai/gpt-4o-mini,T,RV4,C+NV,Retrieve Value,11,"11,0 anos (São Paulo).",TBD,NAO
+openai/gpt-4o-mini,T,CDF1,C+NV,Compute Derived + Filter,"1,377","≈ R$1.337,9.",TBD,NAO
+openai/gpt-4o-mini,T,CDF2,C+NV,Compute Derived + Filter,5,10 estados.,TBD,NAO
+openai/gpt-4o-mini,T,CDF3,C+NV,Compute Derived + Filter,10.4,"≈ 10,43 anos.",TBD,NAO
+openai/gpt-4o-mini,GT,FE5,C+NV,Find Extremum,"A população do estado que possui a maior renda média é 45,973,194.",2.982.818 (Distrito Federal).,TBD,NAO
+openai/gpt-4o-mini,GT,RV4,C+NV,Retrieve Value,"O estado mais populoso do Brasil é São Paulo, que tem 11 anos de estudo.","11,0 anos (São Paulo).",TBD,NAO
+openai/gpt-4o-mini,GT,CDF1,C+NV,Compute Derived + Filter,A renda média dos estados da região Nordeste é de R$ 1.377.,"≈ R$1.337,9.",TBD,NAO
+openai/gpt-4o-mini,GT,CDF2,C+NV,Compute Derived + Filter,Cinco estados têm renda média acima de R$2.000.,10 estados.,TBD,NAO
+openai/gpt-4o-mini,GT,CDF3,C+NV,Compute Derived + Filter,A média de anos de estudo dos estados da região Sul é 10.4.,"≈ 10,43 anos.",TBD,NAO
+openai/gpt-4o-mini,G,FE5,C+NV,Find Extremum,São Paulo.,2.982.818 (Distrito Federal).,TBD,NAO
+openai/gpt-4o-mini,G,RV4,C+NV,Retrieve Value,São Paulo tem 12 anos de estudo.,"11,0 anos (São Paulo).",TBD,NAO
+openai/gpt-4o-mini,G,CDF1,C+NV,Compute Derived + Filter,A renda média dos estados da região Nordeste é de aproximadamente R$ 1.500.,"≈ R$1.337,9.",TBD,NAO
+openai/gpt-4o-mini,G,CDF2,C+NV,Compute Derived + Filter,Cinco estados têm renda média acima de R$2.000.,10 estados.,TBD,NAO
+openai/gpt-4o-mini,G,CDF3,C+NV,Compute Derived + Filter,"A média de anos de estudo dos estados da região Sul é 11,5.","≈ 10,43 anos.",TBD,NAO
