@@ -37,10 +37,10 @@ def run_experiment(
     # 3. Descobre o que já foi processado para retomar de onde parou
     processed_set = get_processed_combinations(output_csv_path)
     
-    # Limita a 5 perguntas no modo debug
+    # Limita a 1 pergunta no modo debug
     if debug:
-        logger.info("MODO DEBUG ATIVADO: Testando apenas as 5 primeiras perguntas.")
-        df_perguntas = df_perguntas.head(5)
+        logger.info("MODO DEBUG ATIVADO: Testando apenas a primeira pergunta.")
+        df_perguntas = df_perguntas.head(1)
 
     # Verifica se a chave da API existe antes de começar
     api_key = os.environ.get("OPENROUTER_API_KEY")

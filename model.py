@@ -12,7 +12,7 @@ from pydantic import SecretStr
 class OpenRouterModel:
 	"""Interface fina para conversar com modelos do OpenRouter via LangChain."""
 
-	def __init__(self, model_name: str, key: str, temperature: float = 0.5, max_retries: int = 3):
+	def __init__(self, model_name: str, key: str, temperature: float = 0.0, max_retries: int = 3):
 		self.model_name = model_name
 		self.max_retries = max_retries
 		self.model = ChatOpenAI(

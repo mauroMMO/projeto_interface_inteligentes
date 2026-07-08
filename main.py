@@ -26,7 +26,7 @@ IMAGE_PATH = "./dados/scatterplot.jpeg"
 OUTPUT_CSV = "./resultados_experimento_mapa.csv"
 
 # 2. Definições do Lote
-DEBUG = True # Quando True, roda só as 5 primeiras perguntas e imprime o payload completo no terminal
+DEBUG = False # Quando True, roda só a primeira pergunta e imprime o payload completo no terminal
 
 # Quais modelos testar? (Nomes oficiais do OpenRouter)
 MODELS_TO_TEST = [
@@ -34,19 +34,19 @@ MODELS_TO_TEST = [
     # 1. Modelos Rápidos (Foco em Agilidade / Custo-Benefício)
     # ==========================================
     "google/gemini-3.5-flash",      # Google Rápido
-    "openai/gpt-4o-mini",           # OpenAI Rápido
-    "anthropic/claude-3.5-haiku",   # Anthropic Rápido
+    "openai/gpt-5.4-mini",           # OpenAI Rápido
+    "anthropic/claude-haiku-4.5",   # Anthropic Rápido
     
     # ==========================================
     # 2. Modelos de Maior Pensamento (Foco em Raciocínio Profundo / Pro)
     # ==========================================
     "google/gemini-3.1-pro-preview", # Google Pro (Preview)
-    "openai/gpt-4o",                 # OpenAI Pro (Omni)
-    "anthropic/claude-3.5-sonnet"    # Anthropic Pro (Sonnet)
+    "openai/gpt-5.5",                 # OpenAI Pro 
+    "anthropic/claude-opus-4.8"    # Anthropic Pro (Sonnet)
 ]
 # Quais condições? 'T' (Tabela), 'G' (Imagem), 'GT' (Tabela + Imagem)
-CONDITIONS_TO_TEST = ['T', 'GT', 'G'] 
-
+#CONDITIONS_TO_TEST = ['T', 'GT', 'G'] 
+CONDITIONS_TO_TEST = ['T'] 
 if __name__ == "__main__":
     logging.info("A iniciar o pipeline de Chart QA...")
     
