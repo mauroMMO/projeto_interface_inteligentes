@@ -130,3 +130,7 @@ def save_result_incremental(output_csv_path: str, result_dict: dict) -> None:
 		if not file_exists:
 			writer.writeheader()
 		writer.writerow(result_dict)
+
+def load_results(csv_path: str) -> TableData:
+    """Carrega o arquivo CSV com as respostas já avaliadas."""
+    return _read_csv_file(csv_path)
